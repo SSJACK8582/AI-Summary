@@ -1,5 +1,5 @@
 requests
-dotenv
+python-dotenv
 gevent
 flask
 flask_cors
