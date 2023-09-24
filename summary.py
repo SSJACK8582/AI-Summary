@@ -2,6 +2,7 @@ import os
 import re
 import json
 import time
+import whisper
 import requests
 from dotenv import load_dotenv
 from gevent import pywsgi
@@ -277,6 +278,9 @@ def get_audio_text(id, p=0):
     audio_url = get_audio_url(id, p)
     base_url = audio_url.get('base_url')
     download_data(id, base_url)
+    model = whisper.load_model('small')
+    result = model.transcribe(audio='{}.wav'.format(id), language='chinese')
+    return result['text']
 
 
 def stream(prompt_list):
